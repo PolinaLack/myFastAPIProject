@@ -1,11 +1,9 @@
+from datetime import datetime
 from typing import Annotated
 
-from data import holidays_all, users, calendar
+from data import calendar, holidays_all, users
 from fastapi import Body
 from models import Holidays_base
-from datetime import datetime
-
-
 
 
 # def serv_post_new_holidays(holidays_in: Holidays_base) -> str:
