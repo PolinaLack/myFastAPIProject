@@ -1,8 +1,7 @@
-from typing import Annotated, Any
+from typing import Annotated
 
-from data import holidays_all, users
-from fastapi import Body, Cookie, Depends, FastAPI, Path
-from models import Holidays_base, Holidays_insert, User
+from fastapi import Depends, FastAPI
+from models import Holidays_base
 from servises import serv_delete_holidays, serv_get_my_holidays, serv_post_new_holidays
 
 app = FastAPI()

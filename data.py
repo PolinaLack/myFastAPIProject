@@ -1,4 +1,4 @@
-from models import Holidays_base, User
+from models import Holidays_base
 
 users: dict[str, list[int]] = {
     "User1": [1],

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// путь до интерепретатрора для code runner
+		"python.defaultInterpreterPath": "C:/Users/PoliHas/Desktop/myFastAPIProject/.venv/Scripts/python.exe",
+        // путь до окружения для code runner
+		"code-runner.executorMap": {"python": "call C:/Users/PoliHas/Desktop/myFastAPIProject/.venv/Scripts/activate.bat && python -u"}
+	}
+}
