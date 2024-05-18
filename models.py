@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     name: str
-    holidays_id: list[int]
+    holis_id: list[int]
 
 
 class Admin(User):

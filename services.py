@@ -1,21 +1,35 @@
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Protocol
 
-from data import calendar, holidays_all
-from dependencies import get_user_service
 from fastapi import Body, Depends
 from models import Holidays_base, User
-from repository import RepoHolidays, RepoUsers, RepoUsersProtocol
+from repository import UsersRepo, UsersRepoProtocol
 
 
-class HolidaysServises:
-    def __init__(self):
+class UsersServicesProtocol(Protocol):
+    def get_holidays_by_user_name(self, name: str) -> list[Holidays_base]:
         ...
+
+
+class UsersServices:
+    def __init__(self, user_repo: UsersRepoProtocol) -> None:
+        self.user_repo: UsersRepoProtocol = user_repo
     
-    def post_new_holidays(self, holidays_in: Holidays_base, user_name, 
-                          users: Annotated[RepoUsers, Depends()]):
-        if user_name not in users.get_all_users():
-            RepoHolidays().post_holidays(holidays_in=holidays_in, holidays_id=max(holidays_all) + 1)
+    
+    def get_holidays_by_user_name(self, name: str) -> list[Holidays_base]:
+        return self.user_repo.get_holidays_by_user_name(name=name)
+
+
+# class HolidaysServises:
+#     def __init__(self, holidays_repo: HolidaysRepoProtocol) -> None:
+#         self.holidays_repo: HolidaysRepoProtocol = holidays_repo
+
+
+    
+    # def post_new_holidays(self, holidays_in: Holidays_base, user_name, 
+    #                       users: Annotated[UsersRepo, Depends()]):
+    #     if user_name not in users.get_all_users():
+    #         HolidaysRepo().post_holidays(holidays_in=holidays_in, holidays_id=max(holidays_all) + 1)
     
     # def get_my_holidays(self, user_name: Annotated[str, Body()], ):
     #     user: User = self.users.get_user_by_name(name=user_name)
@@ -23,9 +37,6 @@ class HolidaysServises:
     #     return res
     
 
-class UsersServises:
-    def __init__(self, users: Annotated[RepoUsers | None, Depends()]):
-        self.users = users if 
             
     
 
@@ -56,8 +67,6 @@ class UsersServises:
 #             calendar[str(start + date)] += 1
 
     
-    
-
 
 
 # def serv_delete_holidays(user_name: Annotated[str, Body()], 

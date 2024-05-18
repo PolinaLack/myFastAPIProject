@@ -1,13 +1,13 @@
 from models import Holidays_base, User
 
-users: dict[str, User] = {
-    "User1": User(name="User1", holidays_id=[1]), 
-    "User2": User(name="User2", holidays_id=[]),
-    "User3": User(name="User3", holidays_id=[2]),
+users_table: dict[str, User] = {
+    "User1": User(name="User1", holis_id=[1]), 
+    "User2": User(name="User2", holis_id=[]),
+    "User3": User(name="User3", holis_id=[2]),
 }
 
 
-holidays_all: dict[int, Holidays_base] = {
+holis_all: dict[int, Holidays_base] = {
     1: Holidays_base(**{
         "user_name": "User1",
         "start": "01.01.2022",
