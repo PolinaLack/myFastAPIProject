@@ -1,9 +1,9 @@
-from models import Holidays_base
+from models import Holidays_base, User
 
-users: dict[str, list[int]] = {
-    "User1": [1],
-    "User2": [],
-    "User3": [2],
+users: dict[str, User] = {
+    "User1": User(name="User1", holidays_id=[1]), 
+    "User2": User(name="User2", holidays_id=[]),
+    "User3": User(name="User3", holidays_id=[2]),
 }
 
 
