@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     name: str
-    holis_id: list[int]
+    holis_ids: list[int]
 
 
 class Admin(User):
