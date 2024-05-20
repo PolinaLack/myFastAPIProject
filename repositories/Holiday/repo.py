@@ -1,4 +1,4 @@
-from models import Holidays_base
+from models.holiday_models import Holidays_base
 
 
 class HolidaysRepo:

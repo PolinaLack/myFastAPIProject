@@ -1,8 +1,9 @@
 from typing import Annotated
 
 from dependencies import get_holidays_services, get_users_services
-from fastapi import APIRouter, Body, Depends, Query
-from models import Holidays_base
+from fastapi import APIRouter, Body, Depends, HTTPException, Query
+from models.holiday_models import Holidays_base
+from repositories.User.proto import UserNotFoundError
 from services.Holiday.proto import HolidaysServicesProtocol
 from services.User.proto import UsersServicesProtocol
 
@@ -18,8 +19,11 @@ def handle_get_holidays_by_username(
             holis_services: Annotated[HolidaysServicesProtocol, 
                                     Depends(dependency=get_holidays_services)],
             ) -> list[Holidays_base]:
+    try:
+        holis_ids: list[int] = users_services.get_holidays_ids_by_user_name(user_name=user_name)
+    except UserNotFoundError as e:
+        raise HTTPException(status_code=404, detail=f"User {e.user_name} not found")  # noqa: B904
     
-    holis_ids: list[int] = users_services.get_holidays_ids_by_user_name(user_name=user_name)
     user_holis: list[Holidays_base] = holis_services.get_holidays_by_ids(ids=holis_ids)
     return user_holis
 

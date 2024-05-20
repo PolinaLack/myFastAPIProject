@@ -1,11 +1,11 @@
-from models import Holidays_base, User
+from models.holiday_models import Holidays_base
+from models.user_models import User
 
 users_table: dict[str, User] = {
     "User1": User(name="User1", holis_ids=[1, 3]), 
     "User2": User(name="User2", holis_ids=[]),
     "User3": User(name="User3", holis_ids=[2]),
 }
-
 
 holis_table: dict[int, Holidays_base] = {
     1: Holidays_base(**{
@@ -24,7 +24,6 @@ holis_table: dict[int, Holidays_base] = {
         "end": "09.03.2022",
     }),
 }
-
 
 calendar: dict[str, int] = {
     "01.01.2022": 1,

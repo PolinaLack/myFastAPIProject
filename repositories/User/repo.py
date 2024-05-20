@@ -1,4 +1,5 @@
-from models import User
+from models.user_models import User
+from repositories.User.proto import UserNotFoundError
 
 
 class UsersRepo:
@@ -7,7 +8,10 @@ class UsersRepo:
     
     
     def get_holidays_ids_by_user_name(self, user_name) -> list[int]:
-        user: User = self.users_table[user_name]   
+        try:
+            user: User = self.users_table[user_name]
+        except KeyError:
+            raise UserNotFoundError(user_name=user_name) from KeyError
         return user.holis_ids
     
     
