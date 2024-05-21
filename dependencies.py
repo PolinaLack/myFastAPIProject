@@ -2,8 +2,8 @@ from typing import Annotated
 
 from data import holis_table, users_table
 from fastapi import Depends
-from repositories.Holiday.proto import HolidaysRepoProtocol
 from repositories.Holiday.repo import HolidaysRepo
+from repositories.Holiday.proto import HolidaysRepoProtocol
 from repositories.User.proto import UsersRepoProtocol
 from repositories.User.repo import UsersRepo
 from services.Holiday.proto import HolidaysServicesProtocol

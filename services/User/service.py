@@ -1,3 +1,4 @@
+from typing import NoReturn
 from repositories.User.proto import UsersRepoProtocol
 
 
@@ -6,7 +7,7 @@ class UsersServices:
         self.user_repo: UsersRepoProtocol = user_repo
     
       
-    def get_holidays_ids_by_user_name(self, user_name: str) -> list[int]:
+    def get_holidays_ids_by_user_name(self, user_name: str) -> list[int] | NoReturn:
         return self.user_repo.get_holidays_ids_by_user_name(user_name=user_name)
     
     

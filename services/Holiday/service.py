@@ -1,5 +1,6 @@
 from models.holiday_models import Holidays_base
 from repositories.Holiday.proto import HolidaysRepoProtocol
+from services.User.proto import UsersServicesProtocol
 
 
 class HolidaysServices:
@@ -15,6 +16,12 @@ class HolidaysServices:
     def get_holidays_by_ids(self, ids: list[int]) -> list[Holidays_base]:
         return self.holis_repo.get_holidays_by_ids(ids=ids)
     
+    # экспериментальная часть
+    def get_holidays_by_user_name(self, user_name: str,
+                                  users_services: UsersServicesProtocol) -> list[Holidays_base]:
+        user_holis_ids: list[int] | None = users_services.get_holidays_ids_by_user_name(user_name=user_name)
+        return self.holis_repo.get_holidays_by_ids(ids=user_holis_ids)
+    # экспериментальная часть
     
     def delete_holidays(self, holis_id: int) -> None:
         self.holis_repo.delete_holidays(holis_id=holis_id)

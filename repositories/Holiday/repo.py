@@ -1,4 +1,5 @@
 from models.holiday_models import Holidays_base
+from repositories.Holiday.proto import HolidaysIdNotFoundError
 
 
 class HolidaysRepo:
@@ -17,11 +18,17 @@ class HolidaysRepo:
 
     
     def delete_holidays(self, holis_id: int) -> None:
-        del self.holis_table[holis_id]
+        try:
+            del self.holis_table[holis_id]
+        except KeyError:
+            raise HolidaysIdNotFoundError(holis_id=holis_id) from KeyError
     
     
     def put_holidays(self, holis_id: int, holis_in: Holidays_base) -> None:
-        self.holis_table[holis_id] = holis_in
+        try:
+            self.holis_table[holis_id] = holis_in
+        except KeyError:
+            raise HolidaysIdNotFoundError(holis_id=holis_id) from KeyError
     
     
     # в разработке
