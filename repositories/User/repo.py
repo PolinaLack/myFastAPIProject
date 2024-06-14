@@ -1,6 +1,6 @@
 from typing import NoReturn
 
-from models.user_models import User
+from models.user import User
 from repositories.User.proto import UserNotFoundError
 
 

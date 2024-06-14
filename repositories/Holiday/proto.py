@@ -1,23 +1,35 @@
-from typing import Protocol
+from typing import NoReturn, Protocol
 
-from models.holiday_models import Holidays_base
+from models.holiday import Holiday_base
 
 
-class HolidaysIdNotFoundError(Exception):
+class HolidayIdNotFoundError(Exception):
     def __init__(self,holis_id: int) -> None:
         self.holis_id: int = holis_id
+        
+
+class DateIsBusyError(Exception):
+    def __init__(self,holis_in) -> None:
+        self.start: str = holis_in.start
+        self.end_date: str = holis_in.end_date
 
 
-class HolidaysRepoProtocol(Protocol):     
-    def post_holidays(self, holis_in: Holidays_base) -> int:
+class HolidayRepoProtocol(Protocol):     
+    def get_all_holidays(self) -> dict[int, Holiday_base]:
+        ...
+    
+    
+    def get_holidays_by_user_name(self, user_name) -> dict[int, Holiday_base]:
+        ...
+    
+    
+    def post_holidays(self, holis_in: Holiday_base) -> str | NoReturn: # type: ignore
         ...
         
-    def get_holidays_by_ids(self, ids) -> list[Holidays_base]:
-        ...
-    
-    def delete_holidays(self, holis_id: int) -> None:
-        ...
-    
-    def put_holidays(self, holis_id: int, holis_in: Holidays_base) -> None:
+        
+    def put_holidays(self, holis_id: int, holis_in: Holiday_base) -> str | NoReturn: # type: ignore
         ...
 
+
+    def delete_holidays(self, holis_id: int, user_name: str)-> str | NoReturn: # type: ignore
+        ...

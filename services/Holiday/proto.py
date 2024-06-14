@@ -1,22 +1,27 @@
 from typing import Protocol
 
-from models.holiday_models import Holidays_base
-from services.User.proto import UsersServicesProtocol
+from models.holiday import Holiday_base
 
 
-class HolidaysServicesProtocol(Protocol):
-    def post_holidays(self, holis_in: Holidays_base) -> int:
+class HolidayServicesProtocol(Protocol):
+    def get_all_holidays(self) -> dict[int, Holiday_base]:
+        ...
+
+    
+    def get_holidays_by_user_name(self, user_name: str)  -> dict[int, Holiday_base]:
+        ...
+
+
+    def post_holidays(self, holis_in: Holiday_base) -> str:
         ...
     
-    def get_holidays_by_ids(self, ids: list[int]) -> list[Holidays_base]:
-        ...
     
-    def get_holidays_by_user_name(self, user_name: str,
-                                  users_services: UsersServicesProtocol) -> list[Holidays_base]:
+    def put_holidays(self, holis_id: int, holis_in: Holiday_base) -> str:
         ...
         
-    def delete_holidays(self, holis_id: int) -> None:
-        ...
     
-    def put_holidays(self, holis_id: int, holis_in: Holidays_base) -> None:
+    def delete_holidays(self, holis_id: int, user_name: str) -> str:
         ...
+        
+        
+        

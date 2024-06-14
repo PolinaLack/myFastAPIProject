@@ -1,2 +1,5 @@
 **__pycache__
 __pycache__/main.cpython-312.pyc
+postgres_data
+.vscode/settings.json
+docker-compose.yml

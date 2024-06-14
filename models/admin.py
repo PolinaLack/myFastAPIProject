@@ -1,4 +1,4 @@
-from models.user_models import User
+from models.user import User
 
 
 class Admin(User):

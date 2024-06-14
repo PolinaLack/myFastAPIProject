@@ -1,13 +1,14 @@
 from typing import Annotated
 
-from data import holis_table, users_table
+from data import users_table
 from fastapi import Depends
-from repositories.Holiday.repo import HolidaysRepo
-from repositories.Holiday.proto import HolidaysRepoProtocol
+from postgres_pool import postgresql_pool
+from repositories.Holiday.proto import HolidayRepoProtocol
+from repositories.Holiday.repo import HolidayRepo
 from repositories.User.proto import UsersRepoProtocol
 from repositories.User.repo import UsersRepo
-from services.Holiday.proto import HolidaysServicesProtocol
-from services.Holiday.service import HolidaysServices
+from services.Holiday.proto import HolidayServicesProtocol
+from services.Holiday.service import HolidayServices
 from services.User.proto import UsersServicesProtocol
 from services.User.service import UsersServices
 
@@ -21,12 +22,12 @@ def get_users_services(user_repo: Annotated[UsersRepoProtocol,
     return UsersServices(user_repo=user_repo)
 
 
-def get_holidays_repo() -> HolidaysRepoProtocol:
-    return HolidaysRepo(holis_table=holis_table)
+def get_holidays_repo() -> HolidayRepoProtocol:
+    return HolidayRepo(postgresql_pool)
 
 
-def get_holidays_services(holis_repo: Annotated[HolidaysRepoProtocol, 
-              Depends(dependency=get_holidays_repo)]) -> HolidaysServicesProtocol:
-    return HolidaysServices(holis_repo=holis_repo)
+def get_holidays_services(holis_repo: Annotated[HolidayRepoProtocol, 
+              Depends(dependency=get_holidays_repo)]) -> HolidayServicesProtocol:
+    return HolidayServices(holis_repo=holis_repo)
 
 
